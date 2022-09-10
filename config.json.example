@@ -1,0 +1,17 @@
+{ 
+    "DEFAULT": {
+        "TOKEN": "",
+        "STATUS": "",
+        "PREFIX": "."
+    },
+
+    "GUILD": "",
+
+    "MODERATOR": [
+        "**Admin**"
+    ],
+
+    "CHANNEL": {
+        "WELCOME": null
+    }
+}
