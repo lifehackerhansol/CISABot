@@ -5,7 +5,10 @@
 1. Make a copy of `config.json.example` and name it `config.json`.
 1. Set your bot's token ID.
     - You will need to create a bot over at [Discord Developer Portal](https://discord.com/developers/applications).
+1. Configure stuff in `config.json` tailored to your server.
+    - Bot does not support more than one server at this time.
 1. (Optional) Set your command prefix to whatever you like.
+    - Default is `.`
 1. Install the following for your host:
     - Python 3.9.x (and its respective pip)
 1. Run `pip install -r requirements.txt`
@@ -34,4 +37,4 @@
 
 ## Credits
 - Discord.py: This wouldn't exist without it
-- [Nintendo Homebrew's Kurisu](https://github.com/nh-server/kurisu): `utils.py` error embeds, `load.py`, moderation commands
+- [Nintendo Homebrew's Kurisu](https://github.com/nh-server/kurisu): `utils.py` error embeds, `load.py`

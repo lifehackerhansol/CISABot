@@ -1,4 +1,5 @@
 #
+# CISA 2022 Discord server bot
 # Copyright (C) 2021-present lifehackerhansol
 #
 # This program is free software: you can redistribute it and/or modify
