@@ -35,6 +35,10 @@ class General(commands.Cog):
         embed.description = cleandoc(text)
         await ctx.send(embed=embed)
 
+    @commands.command()
+    async def about(self, ctx):
+        await ctx.send("https://github.com/lifehackerhansol/CISABot")
+
     @commands.group(invoke_without_command=True, case_insensitive=True)
     async def outline(self, ctx):
         """List of class outlines"""
