@@ -18,6 +18,7 @@ from discord.ext import commands
 
 from utils.utils import is_staff
 
+
 class Load(commands.Cog):
     """
     Load commands.
