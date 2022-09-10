@@ -5,10 +5,16 @@
         "PREFIX": "."
     },
 
-    "GUILD": "",
+    "GUILD": null,
 
     "MODERATOR": [
         "**Admin**"
+    ],
+
+    "CLASS": [
+        "SETG": null,
+        "SETH": null,
+        "SETJ": null
     ],
 
     "CHANNEL": {

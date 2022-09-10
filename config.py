@@ -35,6 +35,9 @@ def loadSettings() -> Dict[str, Any]:
     # server specifics
     ret['GUILD'] = settings.get('GUILD')
     ret['staff_roles'] = [x for x in settings['MODERATOR']]
+    ret['SETG_ROLE'] = settings['CLASS']['SETG']
+    ret['SETH_ROLE'] = settings['CLASS']['SETH']
+    ret['SETJ_ROLE'] = settings['CLASS']['SETJ']
 
     # channels
     ret['WELCOME'] = settings['CHANNEL']['WELCOME']
