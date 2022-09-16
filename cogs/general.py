@@ -5,9 +5,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
 
-from inspect import cleandoc
-
-import discord
 from discord.ext import commands
 
 
@@ -18,11 +15,6 @@ class General(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-
-    async def simple_embed(self, ctx, text, *, title="", color=discord.Color.default()):
-        embed = discord.Embed(title=title, color=color)
-        embed.description = cleandoc(text)
-        await ctx.send(embed=embed)
 
     @commands.command()
     async def about(self, ctx):
