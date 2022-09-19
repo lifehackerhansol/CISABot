@@ -1,8 +1,8 @@
 name: Flake8 Check
 
 on:
+  push:
   pull_request:
-    branches: [ master ]
 
 jobs:
   build:
