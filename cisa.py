@@ -42,14 +42,13 @@ class CISABot(commands.Bot):
                     print(f"Loaded cog cogs.{filename[:-3]}")
             except Exception as e:
                 exc = "{}: {}".format(type(e).__name__, e)
-                print("Failed to load cog {}\n{}".format(cog, exc))
+                print(f"Failed to load cog {cog}\n{exc}")
         try:
-            cog = "jishaku"
             await self.load_extension("jishaku")
             print("Loaded cog jishaku")
         except Exception as e:
             exc = "{}: {}".format(type(e).__name__, e)
-            print("Failed to load cog {}\n{}".format(cog, exc))
+            print(f"Failed to load cog jishaku\n{exc}")
 
     async def on_ready(self):
         print("CISABot ready.")
