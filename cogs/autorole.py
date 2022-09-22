@@ -28,6 +28,8 @@ class Autorole(commands.Cog):
                     return await message.author.add_roles(message.guild.get_role(self.bot.settings['SETH_ROLE']))
                 elif message.content.lower() == "j":
                     return await message.author.add_roles(message.guild.get_role(self.bot.settings['SETJ_ROLE']))
+                elif message.content.lower() == "f":
+                    return await message.author.add_roles(message.guild.get_role(self.bot.settings['DEFAULT_ROLE']))
                 else:
                     return await message.channel.send(content="Invalid class. Try again.", delete_after=10)
 

@@ -14,7 +14,8 @@
     "CLASS": [
         "SETG": null,
         "SETH": null,
-        "SETJ": null
+        "SETJ": null,
+        "DEFAULT": null
     ],
 
     "CHANNEL": {
