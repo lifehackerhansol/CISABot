@@ -22,11 +22,11 @@ class Autorole(commands.Cog):
         if message.author.id != self.bot.user.id:
             if message.guild.id == self.bot.settings['GUILD'] and message.channel.id == self.bot.settings['WELCOME']:
                 await message.delete()
-                if message.content == "g":
+                if message.content.lower() == "g":
                     return await message.author.add_roles(message.guild.get_role(self.bot.settings['SETG_ROLE']))
-                elif message.content == "h":
+                elif message.content.lower() == "h":
                     return await message.author.add_roles(message.guild.get_role(self.bot.settings['SETH_ROLE']))
-                elif message.content == "j":
+                elif message.content.lower() == "j":
                     return await message.author.add_roles(message.guild.get_role(self.bot.settings['SETJ_ROLE']))
                 else:
                     return await message.channel.send(content="Invalid class. Try again.", delete_after=10)
