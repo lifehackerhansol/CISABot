@@ -30,5 +30,13 @@ def loadSettings() -> Dict[str, Any]:
 
     # channels
     ret['WELCOME'] = settings['CHANNEL']['WELCOME']
+    ret['BUSUPDATES'] = settings['CHANNEL']['BUSUPDATES']
+
+    # Twitter API
+    ret['TWITTER_APIKEY'] = settings['TWITTER']['APIKEY']
+    ret['TWITTER_APISECRET'] = settings['TWITTER']['APISECRET']
+    ret['TWITTER_BEARER'] = settings['TWITTER']['BEARER']
+    ret['TWITTER_TOKEN'] = settings['TWITTER']['TOKEN']
+    ret['TWITTER_TOKENSECRET'] = settings['TWITTER']['TOKENSECRET']
 
     return ret

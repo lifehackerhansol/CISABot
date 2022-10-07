@@ -57,5 +57,7 @@ def is_guild_owner():
     return commands.check(predicate)
 
 
-def is_staff(ctx):
-    return any((role.id in ctx.bot.settings['staff_roles'] or role.name in ctx.bot.settings['staff_roles']) for role in ctx.message.author.roles) if not ctx.author == ctx.guild.owner else True
+def is_staff():
+    def predicate(ctx):
+        return any((role.id in ctx.bot.settings['staff_roles'] or role.name in ctx.bot.settings['staff_roles']) for role in ctx.message.author.roles) if not ctx.author == ctx.guild.owner else True
+    return commands.check(predicate)

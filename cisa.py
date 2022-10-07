@@ -51,6 +51,7 @@ class CISABot(commands.Bot):
             print(f"Failed to load cog jishaku\n{exc}")
 
     async def on_ready(self):
+        await self.load_cogs()
         print("CISABot ready.")
 
     async def on_command_error(self, ctx: commands.Context, exc: commands.CommandInvokeError):
@@ -110,7 +111,6 @@ async def mainprocess():
     bot.help_command = commands.DefaultHelpCommand()
     bot.session = aiohttp.ClientSession()
     print('Starting bot...')
-    await bot.load_cogs()
     await bot.start(settings['TOKEN'])
 
 

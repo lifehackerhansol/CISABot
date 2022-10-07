@@ -1,4 +1,4 @@
-{ 
+{
     "DEFAULT": {
         "TOKEN": "",
         "STATUS": "",
@@ -19,6 +19,15 @@
     ],
 
     "CHANNEL": {
-        "WELCOME": null
+        "WELCOME": null,
+        "BUSUPDATES": null
+    },
+
+    "TWITTER": {
+        "APIKEY": "",
+        "APISECRET": "",
+        "BEARER": "",
+        "TOKEN": "",
+        "TOKENSECRET": ""
     }
 }
