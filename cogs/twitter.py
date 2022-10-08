@@ -143,9 +143,9 @@ class Twitter(commands.Cog):
     async def delrule(self, ctx, ruleid: int):
         rules = await self.updatestream.get_rules()
         if ruleid not in [i for i in rules.data.id]:
-            return await ctx.send(f"This rule doesn't exist. Try `getrules` for a list of current rules.")
+            return await ctx.send("This rule doesn't exist. Try `getrules` for a list of current rules.")
         await self.updatestream.delete_rules(ruleid)
-        await ctx.send(f"Success! {self.bot.user.mention} is no longer receiving tweets from {user_response.data.username}.")
+        await ctx.send("Rule removed.")
 
 
 async def setup(bot):
