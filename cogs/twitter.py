@@ -6,7 +6,6 @@
 #
 
 import discord
-import tweepy
 import tweepy.asynchronous
 from discord.ext import commands
 
@@ -22,7 +21,7 @@ class UpdateStream(tweepy.asynchronous.AsyncStreamingClient):
         embed = discord.Embed(timestamp=tweet.created_at)
         embed.author = f"{tweet.fields.user.name} (@{tweet.fields.user.username})"
         embed.description = tweet.text
-        self.channel.send(embed=embed)
+        await self.channel.send(embed=embed)
 
 
 class Twitter(commands.Cog):
@@ -51,7 +50,7 @@ class Twitter(commands.Cog):
             print(bot.settings['TWITTER_APISECRET'])
             print(bot.settings['TWITTER_TOKEN'])
             print(bot.settings['TWITTER_TOKENSECRET'])
-            self.twitter = tweepy.Client(
+            self.twitter = tweepy.asynchronous.Client(
                 consumer_key=bot.settings['TWITTER_APIKEY'],
                 consumer_secret=bot.settings['TWITTER_APISECRET'],
                 access_token=bot.settings['TWITTER_TOKEN'],
@@ -61,8 +60,8 @@ class Twitter(commands.Cog):
     @is_staff()
     @commands.command()
     async def follow(self, ctx, username: str):
-        user_response = self.twitter.get_user(username=username, user_auth=True)
-        self.twitter.follow_user(user_response.data.id, user_auth=True)
+        await user_response = self.twitter.get_user(username=username, user_auth=True)
+        await self.twitter.follow_user(user_response.data.id, user_auth=True)
         await ctx.send(f"Success! {self.bot.user.mention} is now following {user_response.data.username}.")
 
 
