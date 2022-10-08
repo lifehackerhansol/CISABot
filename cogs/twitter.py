@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
 
+import discord
 import tweepy
 import tweepy.asynchronous
 from discord.ext import commands
@@ -17,8 +18,11 @@ class UpdateStream(tweepy.asynchronous.AsyncStreamingClient):
         self.channel = channel_target
         super().__init__(bearer_key)
 
-    async def on_tweet(self):
-        self.channel.send("test")
+    async def on_tweet(self, tweet):
+        embed = discord.Embed(timestamp=tweet.created_at)
+        embed.author = f"{tweet.fields.user.name} (@{tweet.fields.user.username})"
+        embed.description = tweet.text
+        self.channel.send(embed=embed)
 
 
 class Twitter(commands.Cog):
