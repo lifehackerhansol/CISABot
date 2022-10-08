@@ -6,6 +6,7 @@
 #
 
 import traceback
+from inspect import cleandoc
 
 import discord
 import tweepy.asynchronous
@@ -26,8 +27,9 @@ class UpdateStream(tweepy.asynchronous.AsyncStreamingClient):
     async def on_tweet(self, tweet):
         embed = discord.Embed(timestamp=tweet.created_at)
         user = await self.twitter.get_user(id=tweet.author_id, user_fields='profile_image_url', user_auth=True)
-        embed.set_author(name=f"{user.data.name} (@{user.data.username})", icon_url=user.data.profile_image_url)
-        embed.description = tweet.text
+        embed.set_author(name=f"{user.data.name} (@{user.data.username})", icon_url=user.data.profile_image_url, url=f"https://twitter.com/{user.data.username}/statuses/{tweet.id}")
+        embed.url = f"https://twitter.com/{user.data.username}/statuses/{tweet.id}"
+        embed.description = cleandoc(tweet.text)
         await self.channel.send(embed=embed)
 
     def create_error_embed(self, exc) -> discord.Embed:
