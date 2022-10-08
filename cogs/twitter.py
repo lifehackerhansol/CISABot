@@ -15,13 +15,18 @@ from utils.utils import is_staff
 
 
 class UpdateStream(tweepy.asynchronous.AsyncStreamingClient):
-    def __init__(self, bearer_key, channel_target):
+    def __init__(self, bearer_key, twitterClient, channel_target):
         self.channel = channel_target
+        self.twitter = twitterClient
         super().__init__(bearer_token=bearer_key)
+
+    def filter(self):
+        super().filter(tweet_fields=['author_id', 'created_at'])
 
     async def on_tweet(self, tweet):
         embed = discord.Embed(timestamp=tweet.created_at)
-        # embed.author = f"{tweet.fields.user.data.name} (@{tweet.fields.user.data.username})"
+        user = await self.twitter.get_user(id=tweet.author_id, user_fields='profile_image_url', user_auth=True)
+        embed.set_author(name=f"{user.data.name} (@{user.data.username})", icon_url=user.data.profile_image_url)
         embed.description = tweet.text
         await self.channel.send(embed=embed)
 
@@ -74,6 +79,7 @@ class Twitter(commands.Cog):
             )
             self.updatestream = UpdateStream(
                 bot.settings['TWITTER_BEARER'],
+                self.twitter,
                 bot.get_guild(bot.settings['GUILD']).get_channel(bot.settings['BUSUPDATES'])
             )
             self.updatestream.filter()
