@@ -57,9 +57,6 @@ class UpdateStream(tweepy.asynchronous.AsyncStreamingClient):
         print(''.join(traceback.format_exception(type(exception), value=exception, tb=exception.__traceback__)))
         await self.debugchannel.send(embed=self.create_error_embed(exception))
 
-    async def on_request_error(self, status_code):
-        await self.debugchannel.send(f"Stream encountered HTTP Error: {status_code}")
-
 
 class Twitter(commands.Cog):
     """
