@@ -94,14 +94,17 @@ class Twitter(commands.Cog):
 
     @is_staff()
     @commands.command()
-    async def addrule(self, ctx, *rule: str):
+    async def addrule(self, ctx, *ruleinput: str):
         """
         Adds a rule to the Twitter stream.
         Must use parameters here: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/integrate/build-a-rule
         """
-        rule = tweepy.StreamRule(value=rule)
-        await self.updatestream.add_rules(rule)
-        await ctx.send(f"Rule successfully added.")
+        rule = tweepy.StreamRule(value=' '.join(ruleinput))
+        ret = await self.updatestream.add_rules(rule)
+        if ret.errors:
+            await ctx.send("Failed to add this rule. Is the input correct?")
+            return await ctx.send(f"{ret.errors[0]['title']}: {ret.errors[0]['details']}")
+        await ctx.send("Rule successfully added.")
 
     @is_staff()
     @commands.command()
@@ -110,6 +113,8 @@ class Twitter(commands.Cog):
         Gets all rules.
         """
         rules = await self.updatestream.get_rules()
+        if not rules.data:
+            return await ctx.send("No rules found.")
         ret = "Curernt rules:\n"
         for i in rules.data:
             ret += f"{i.id}: {i.value}\n"
@@ -135,14 +140,11 @@ class Twitter(commands.Cog):
 
     @is_staff()
     @commands.command()
-    async def unfollow(self, ctx, username: str):
-        user_response = await self.twitter.get_user(username=username, user_auth=True)
+    async def delrule(self, ctx, ruleid: int):
         rules = await self.updatestream.get_rules()
-        ret = []
-        for i in rules.data:
-            if str(user_response.data.id) in i.value:
-                ret.append(i.id)
-        await self.updatestream.delete_rules(ret)
+        if ruleid not in [i for i in rules.data.id]:
+            return await ctx.send(f"This rule doesn't exist. Try `getrules` for a list of current rules.")
+        await self.updatestream.delete_rules(ruleid)
         await ctx.send(f"Success! {self.bot.user.mention} is no longer receiving tweets from {user_response.data.username}.")
 
 
