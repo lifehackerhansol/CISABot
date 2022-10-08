@@ -16,8 +16,9 @@ from utils.utils import is_staff
 
 
 class UpdateStream(tweepy.asynchronous.AsyncStreamingClient):
-    def __init__(self, bearer_key, twitterClient, channel_target):
+    def __init__(self, bearer_key, twitterClient, channel_target, debug_target):
         self.channel = channel_target
+        self.debugchannel = debug_target
         self.twitter = twitterClient
         super().__init__(bearer_token=bearer_key)
 
@@ -41,20 +42,20 @@ class UpdateStream(tweepy.asynchronous.AsyncStreamingClient):
         return embed
 
     async def on_connect(self):
-        print("Connection to Twitter success")
+        await self.debugchannel.send("Connection to Twitter successful!")
 
     async def on_connection_error(self):
-        print("Connection to Twitter fail")
+        await self.debugchannel.send("Connection to Twitter failed.")
 
     async def on_disconnect(self):
-        print("Disconnected from Twitter")
+        await self.debugchannel.send("Disconnected from Twitter.")
 
     async def on_errors(self, errors):
-        print(errors)
+        await self.debugchannel.send(errors)
 
     async def on_exception(self, exception):
         print(''.join(traceback.format_exception(type(exception), value=exception, tb=exception.__traceback__)))
-        await self.channel.send(embed=self.create_error_embed(exception))
+        await self.debugchannel.send(embed=self.create_error_embed(exception))
 
 
 class Twitter(commands.Cog):
@@ -71,7 +72,8 @@ class Twitter(commands.Cog):
             bot.settings['TWITTER_TOKEN'],
             bot.settings['TWITTER_TOKENSECRET'],
             bot.settings['BUSUPDATES'],
-            bot.settings['GUILD']
+            bot.settings['GUILD'],
+            bot.settings['STAFFCHANNEL']
         ]):
             self.twitter = tweepy.asynchronous.AsyncClient(
                 consumer_key=bot.settings['TWITTER_APIKEY'],
@@ -82,7 +84,8 @@ class Twitter(commands.Cog):
             self.updatestream = UpdateStream(
                 bot.settings['TWITTER_BEARER'],
                 self.twitter,
-                bot.get_guild(bot.settings['GUILD']).get_channel(bot.settings['BUSUPDATES'])
+                bot.get_guild(bot.settings['GUILD']).get_channel(bot.settings['BUSUPDATES']),
+                bot.get_guild(bot.settings['GUILD']).get_channel(bot.settings['STAFFCHANNEL'])
             )
             self.updatestream.filter()
 

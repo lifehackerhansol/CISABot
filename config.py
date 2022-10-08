@@ -29,6 +29,7 @@ def loadSettings() -> Dict[str, Any]:
     ret['DEFAULT_ROLE'] = settings['CLASS']['DEFAULT']
 
     # channels
+    ret['STAFFCHANNEL'] = settings['CHANNEL']['STAFF']
     ret['WELCOME'] = settings['CHANNEL']['WELCOME']
     ret['BUSUPDATES'] = settings['CHANNEL']['BUSUPDATES']
 

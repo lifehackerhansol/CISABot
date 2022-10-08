@@ -19,6 +19,7 @@
     ],
 
     "CHANNEL": {
+        "STAFF": null,
         "WELCOME": null,
         "BUSUPDATES": null
     },
