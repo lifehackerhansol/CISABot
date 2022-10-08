@@ -46,11 +46,7 @@ class Twitter(commands.Cog):
             bot.settings['TWITTER_TOKEN'],
             bot.settings['TWITTER_TOKENSECRET']
         ]):
-            print(bot.settings['TWITTER_APIKEY'])
-            print(bot.settings['TWITTER_APISECRET'])
-            print(bot.settings['TWITTER_TOKEN'])
-            print(bot.settings['TWITTER_TOKENSECRET'])
-            self.twitter = tweepy.asynchronous.Client(
+            self.twitter = tweepy.asynchronous.AsyncClient(
                 consumer_key=bot.settings['TWITTER_APIKEY'],
                 consumer_secret=bot.settings['TWITTER_APISECRET'],
                 access_token=bot.settings['TWITTER_TOKEN'],
@@ -61,8 +57,9 @@ class Twitter(commands.Cog):
     @commands.command()
     async def follow(self, ctx, username: str):
         user_response = await self.twitter.get_user(username=username, user_auth=True)
-        await self.twitter.follow_user(user_response.data.id, user_auth=True)
-        await ctx.send(f"Success! {self.bot.user.mention} is now following {user_response.data.username}.")
+        rule = tweepy.StreamRule(value=f"from:{user_response.data.id}")
+        await self.updatestream.add_rules(rule)
+        await ctx.send(f"Success! {self.bot.user.mention} is now receiving tweets from {user_response.data.username}.")
 
 
 async def setup(bot):
