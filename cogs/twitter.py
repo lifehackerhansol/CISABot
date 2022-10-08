@@ -94,30 +94,44 @@ class Twitter(commands.Cog):
 
     @is_staff()
     @commands.command()
-    async def follow(self, ctx, username: str):
-        user_response = await self.twitter.get_user(username=username, user_auth=True)
-        rule = tweepy.StreamRule(value=f"from:{user_response.data.id}")
+    async def addrule(self, ctx, *rule: str):
+        """
+        Adds a rule to the Twitter stream.
+        Must use parameters here: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/integrate/build-a-rule
+        """
+        rule = tweepy.StreamRule(value=rule)
         await self.updatestream.add_rules(rule)
-        await ctx.send(f"Success! {self.bot.user.mention} is now receiving tweets from {user_response.data.username}.")
+        await ctx.send(f"Rule successfully added.")
 
     @is_staff()
     @commands.command()
-    async def getfollows(self, ctx):
+    async def getrules(self, ctx):
+        """
+        Gets all rules.
+        """
         rules = await self.updatestream.get_rules()
         ret = "Curernt rules:\n"
-        ret += '\n'.join(i.value for i in rules.data)
+        for i in rules.data:
+            ret += f"{i.id}: {i.value}\n"
         await ctx.send(ret)
 
     @is_staff()
     @commands.command()
     async def idtousr(self, ctx, id: int):
+        """
+        Converts a Twitter user ID to a username
+        """
         user_response = await self.twitter.get_user(id=id, user_auth=True)
         await ctx.send(f"{user_response.data.username}")
 
     @is_staff()
     @commands.command()
-    async def checktweetchannel(self, ctx):
-        await ctx.send(f"{self.updatestream.channel.mention}")
+    async def usrtoid(self, ctx, username: str):
+        """
+        Converts a Twitter username to an ID
+        """
+        user_response = await self.twitter.get_user(username=username, user_auth=True)
+        await ctx.send(f"{user_response.data.id}")
 
     @is_staff()
     @commands.command()
