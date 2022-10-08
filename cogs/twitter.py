@@ -95,7 +95,6 @@ class Twitter(commands.Cog):
         user_response = await self.twitter.get_user(username=username, user_auth=True)
         rule = tweepy.StreamRule(value=f"from:{user_response.data.id}")
         await self.updatestream.add_rules(rule)
-        self.updatestream.filter()
         await ctx.send(f"Success! {self.bot.user.mention} is now receiving tweets from {user_response.data.username}.")
 
     @is_staff()
@@ -127,7 +126,6 @@ class Twitter(commands.Cog):
             if str(user_response.data.id) in i.value:
                 ret.append(i.id)
         await self.updatestream.delete_rules(ret)
-        self.updatestream.filter()
         await ctx.send(f"Success! {self.bot.user.mention} is no longer receiving tweets from {user_response.data.username}.")
 
 
