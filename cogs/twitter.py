@@ -60,7 +60,7 @@ class Twitter(commands.Cog):
     @is_staff()
     @commands.command()
     async def follow(self, ctx, username: str):
-        await user_response = self.twitter.get_user(username=username, user_auth=True)
+        user_response = await self.twitter.get_user(username=username, user_auth=True)
         await self.twitter.follow_user(user_response.data.id, user_auth=True)
         await ctx.send(f"Success! {self.bot.user.mention} is now following {user_response.data.username}.")
 
