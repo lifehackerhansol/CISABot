@@ -42,16 +42,16 @@ class UpdateStream(tweepy.asynchronous.AsyncStreamingClient):
         return embed
 
     async def on_connect(self):
-        await self.debugchannel.send("Connection to Twitter successful!")
+        print("Connection to Twitter successful!")
 
     async def on_connection_error(self):
-        await self.debugchannel.send("Connection to Twitter failed.")
+        print("Connection to Twitter failed.")
 
     async def on_disconnect(self):
-        await self.debugchannel.send("Disconnected from Twitter.")
+        print("Disconnected from Twitter.")
 
     async def on_errors(self, errors):
-        await self.debugchannel.send(errors)
+        print(errors)
 
     async def on_exception(self, exception):
         print(''.join(traceback.format_exception(type(exception), value=exception, tb=exception.__traceback__)))
