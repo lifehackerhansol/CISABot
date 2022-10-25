@@ -1,4 +1,4 @@
 discord.py~=2.0.1
 jishaku~=2.5.1
 psutil~=5.9.3
-tweepy[async]~=4.10.1
+tweepy[async]~=4.11.0
