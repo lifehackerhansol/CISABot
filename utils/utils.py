@@ -61,3 +61,18 @@ def is_staff():
     def predicate(ctx):
         return any((role.id in ctx.bot.settings['staff_roles'] or role.name in ctx.bot.settings['staff_roles']) for role in ctx.message.author.roles) if not ctx.author == ctx.guild.owner else True
     return commands.check(predicate)
+
+
+def parse_time(time_string) -> int:
+    """Parses a time string in dhms format to seconds"""
+    # thanks, Luc#5653
+    units = {
+        "d": 86400,
+        "h": 3600,
+        "m": 60,
+        "s": 1
+    }
+    match = re.findall("([0-9]+[smhd])", time_string)  # Thanks to 3dshax server's former bot
+    if not match:
+        return -1
+    return sum(int(item[:-1]) * units[item[-1]] for item in match)

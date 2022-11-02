@@ -1,3 +1,4 @@
+aiosqlite~=0.17.0
 discord.py~=2.0.1
 jishaku~=2.5.1
 psutil~=5.9.3

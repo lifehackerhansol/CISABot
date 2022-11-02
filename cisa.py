@@ -16,6 +16,7 @@ import discord
 from discord.ext import commands
 
 import config
+from utils.sql import SQLDB
 from utils.utils import create_error_embed
 
 
@@ -31,6 +32,7 @@ class CISABot(commands.Bot):
             status=discord.Status.online,
             case_insensitive=True
         )
+        self.db = SQLDB(self)
 
     async def load_cogs(self):
         cog = ""
