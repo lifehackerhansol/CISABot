@@ -1,10 +1,9 @@
 #
 # CISA 2022 Discord server bot
-# Copyright (C) 2021-2022 lifehackerhansol
+# Portions Copyright (C) 2020 Nintendo Homebrew
+# Copyright (C) 2021-2023 lifehackerhansol
 #
-# SPDX-License-Identifier: AGPL-3.0-or-later
-#
-# send_dm_message, command_signature, error embeds taken from Kurisu, http://www.apache.org/licenses/LICENSE-2.0
+# SPDX-License-Identifier: Apache-2.0
 #
 
 import traceback

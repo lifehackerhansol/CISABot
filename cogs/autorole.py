@@ -1,8 +1,8 @@
 #
 # CISA 2022 Discord server bot
-# Copyright (C) 2021-2022 lifehackerhansol
+# Copyright (C) 2021-2023 lifehackerhansol
 #
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: Apache-2.0
 #
 
 from discord.ext import commands
