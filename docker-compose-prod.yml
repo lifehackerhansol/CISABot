@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  cisabot:
+    image: ghcr.io/lifehackerhansol/cisabot
+    volumes:
+      - ./data:/home/cisa/data
+    secrets:
+      - cisabot-config
+
+secrets:
+  cisabot-config:
+    file: ./config.json

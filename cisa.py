@@ -110,7 +110,7 @@ class CISABot(commands.Bot):
 
 
 async def mainprocess():
-    discord.utils.setup_logging(handler=logging.FileHandler('bot.log', encoding='utf-8', mode='w'))
+    discord.utils.setup_logging(handler=logging.FileHandler('data/bot.log', encoding='utf-8', mode='w'))
     discord.utils.setup_logging()
     settings = config.loadSettings()
     bot = CISABot(settings)
