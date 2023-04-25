@@ -1,4 +1,4 @@
 discord.py~=2.2
 jishaku~=2.5
 psutil~=5.9
-tweepy[async]~=4.13
+tweepy[async]~=4.14
