@@ -8,6 +8,7 @@
 #
 
 import asyncio
+import logging
 import os
 from typing import Any, Dict
 
@@ -17,6 +18,9 @@ from discord.ext import commands
 
 import config
 from utils.utils import create_error_embed
+
+
+log = logging.getLogger("bot")
 
 
 class CISABot(commands.Bot):
@@ -39,20 +43,20 @@ class CISABot(commands.Bot):
                 if filename.endswith(".py"):
                     cog = f"cogs.{filename[:-3]}"
                     await self.load_extension(cog)
-                    print(f"Loaded cog cogs.{filename[:-3]}")
+                    log.info(f"Loaded cog cogs.{filename[:-3]}")
             except Exception as e:
                 exc = "{}: {}".format(type(e).__name__, e)
-                print(f"Failed to load cog {cog}\n{exc}")
+                log.info(f"Failed to load cog {cog}\n{exc}")
         try:
             await self.load_extension("jishaku")
-            print("Loaded cog jishaku")
+            log.info("Loaded cog jishaku")
         except Exception as e:
             exc = "{}: {}".format(type(e).__name__, e)
-            print(f"Failed to load cog jishaku\n{exc}")
+            log.info(f"Failed to load cog jishaku\n{exc}")
 
     async def on_ready(self):
         await self.load_cogs()
-        print("CISABot ready.")
+        log.debug("CISABot ready.")
 
     async def on_command_error(self, ctx: commands.Context, exc: commands.CommandInvokeError):
         author: discord.Member = ctx.author
@@ -106,11 +110,13 @@ class CISABot(commands.Bot):
 
 
 async def mainprocess():
+    discord.utils.setup_logging(handler=logging.FileHandler('bot.log', encoding='utf-8', mode='w'))
+    discord.utils.setup_logging()
     settings = config.loadSettings()
     bot = CISABot(settings)
     bot.help_command = commands.DefaultHelpCommand()
     bot.session = aiohttp.ClientSession()
-    print('Starting bot...')
+    log.info('Starting bot...')
     await bot.start(settings['TOKEN'])
 
 

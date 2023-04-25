@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+import logging
 import traceback
 from inspect import cleandoc
 
@@ -13,6 +14,9 @@ import tweepy.asynchronous
 from discord.ext import commands
 
 from utils.utils import is_staff
+
+
+log = logging.getLogger("bot")
 
 
 class UpdateStream(tweepy.asynchronous.AsyncStreamingClient):
@@ -42,19 +46,19 @@ class UpdateStream(tweepy.asynchronous.AsyncStreamingClient):
         return embed
 
     async def on_connect(self):
-        print("Connection to Twitter successful!")
+        log.info("Connection to Twitter successful!")
 
     async def on_connection_error(self):
-        print("Connection to Twitter failed.")
+        log.warn("Connection to Twitter failed.")
 
     async def on_disconnect(self):
-        print("Disconnected from Twitter.")
+        log.warn("Disconnected from Twitter.")
 
     async def on_errors(self, errors):
-        print(errors)
+        log.warn(errors)
 
     async def on_exception(self, exception):
-        print(''.join(traceback.format_exception(type(exception), value=exception, tb=exception.__traceback__)))
+        log.exception(''.join(traceback.format_exception(type(exception), value=exception, tb=exception.__traceback__)))
         await self.debugchannel.send(embed=self.create_error_embed(exception))
 
 
