@@ -8,6 +8,7 @@ RUN python3 -m pip install -r requirements.txt
 USER cisa
 
 COPY cisa.py cisa.py
+COPY config.py config.py
 COPY utils utils
 COPY cogs cogs
 
