@@ -11,12 +11,12 @@
         "**Admin**"
     ],
 
-    "CLASS": [
+    "CLASS": {
         "SETG": null,
         "SETH": null,
         "SETJ": null,
         "DEFAULT": null
-    ],
+    },
 
     "CHANNEL": {
         "STAFF": null,
@@ -30,5 +30,7 @@
         "BEARER": "",
         "TOKEN": "",
         "TOKENSECRET": ""
-    }
+    },
+
+    "MCSERVER": ""
 }

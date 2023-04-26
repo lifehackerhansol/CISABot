@@ -1,4 +1,5 @@
 discord.py~=2.2
 jishaku~=2.5
+mcstatus~=10.0
 psutil~=5.9
 tweepy[async]~=4.14

@@ -40,4 +40,6 @@ def loadSettings() -> Dict[str, Any]:
     ret['TWITTER_TOKEN'] = settings['TWITTER']['TOKEN']
     ret['TWITTER_TOKENSECRET'] = settings['TWITTER']['TOKENSECRET']
 
+    ret['MCSERVER'] = settings['MCSERVER']
+
     return ret
