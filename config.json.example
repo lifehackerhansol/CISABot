@@ -22,15 +22,7 @@
         "STAFF": null,
         "WELCOME": null,
         "BUSUPDATES": null
-    },
-
-    "TWITTER": {
-        "APIKEY": "",
-        "APISECRET": "",
-        "BEARER": "",
-        "TOKEN": "",
-        "TOKENSECRET": ""
-    },
+    }
 
     "MCSERVER": ""
 }
