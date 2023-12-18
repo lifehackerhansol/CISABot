@@ -4,6 +4,8 @@ ENV HOME /home/cisa
 RUN useradd -m cisa
 WORKDIR $HOME
 COPY ./requirements.txt .
+RUN apt-get update \
+    && apt-get -y install build-essential
 RUN python3 -m pip install -r requirements.txt
 USER cisa
 
